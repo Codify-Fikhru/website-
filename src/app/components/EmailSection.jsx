@@ -1,42 +1,11 @@
 "use client";
-import React, { useState } from "react";
-import emailjs from "emailjs-com";
+import React from "react";
 import TiktokIcon from "../../../public/tiktok-icon.svg";
 import WhatsappIcon from "../../../public/whatsapp-icon.svg";
 import Link from "next/link";
 import Image from "next/image";
 
-const EmailSection = () => {
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const { email, name, message } = e.target.elements;
-
-      // Kirim email menggunakan EmailJS
-      const templateParams = {
-        from_name: name.value,
-        message_html: message.value,
-        reply_to: email.value,
-      };
-
-      await emailjs.send(
-        "YOUR_SERVICE_ID", // Ganti dengan service ID Anda
-        "YOUR_TEMPLATE_ID", // Ganti dengan template ID Anda
-        templateParams,
-        "YOUR_USER_ID" // Ganti dengan user ID Anda
-      );
-
-      console.log("Email sent successfully!");
-      setEmailSubmitted(true);
-    } catch (error) {
-      console.error("Error sending email:", error);
-      // Handle error sending email
-    }
-  };
-
+const ContactSection = () => {
   return (
     <section
       id="contact"
@@ -89,70 +58,8 @@ const EmailSection = () => {
           </Link>
         </div>
       </div>
-      <div>
-        {emailSubmitted ? (
-          <p className="text-green-500 text-sm mt-2">
-            Email sent successfully!
-          </p>
-        ) : (
-          <form className="flex flex-col" onSubmit={handleSubmit}>
-            <div className="mb-6">
-              <label
-                htmlFor="email"
-                className="text-white block mb-2 text-sm font-medium"
-              >
-                Your email
-              </label>
-              <input
-                name="email"
-                type="email"
-                id="email"
-                required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="Your Email"
-              />
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="name"
-                className="text-white block text-sm mb-2 font-medium"
-              >
-                Name
-              </label>
-              <input
-                name="name"
-                type="text"
-                id="name"
-                required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="Your Name"
-              />
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="message"
-                className="text-white block text-sm mb-2 font-medium"
-              >
-                Message
-              </label>
-              <textarea
-                name="message"
-                id="message"
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="Your Message"
-              />
-            </div>
-            <button
-              type="submit"
-              className="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2.5 px-5 rounded-lg w-full"
-            >
-              Send Message
-            </button>
-          </form>
-        )}
-      </div>
     </section>
   );
 };
 
-export default EmailSection;
+export default ContactSection;
