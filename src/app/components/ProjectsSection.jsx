@@ -6,58 +6,31 @@ import { motion, useInView } from "framer-motion";
 
 const projectsData = [
   {
-    id: 1,
-    title: "React Portfolio Website",
-    description: "Project 1 description",
-    image: "/images/projects/1.png",
+    id: 7,
+    title: "Puskesmas Lampia Website",
+    description: "Puskesmas Lampia adalah fasilitas kesehatan masyarakat yang menyediakan layanan medis dasar dan pencegahan penyakit untuk penduduk di sekitar Lampia.",
+    image: "/images/projects/7.png",
     tag: ["All", "Web"],
     gitUrl: "/",
-    previewUrl: "/",
+    previewUrl: "https://uptdpuskesmaslampia.id/",
   },
   {
-    id: 2,
-    title: "Potography Portfolio Website",
-    description: "Project 2 description",
-    image: "/images/projects/2.png",
+    id: 8,
+    title: "Team Bento Website",
+    description: "Team Bento adalah tim ahli dalam jasa joki tugas pemrograman, siap membantu dalam menyelesaikan berbagai proyek pemrograman dengan cepat dan efisien.",
+    image: "/images/projects/8.png",
     tag: ["All", "Web"],
     gitUrl: "/",
-    previewUrl: "/",
+    previewUrl: "https://team-bento.vercel.app/",
   },
   {
-    id: 3,
-    title: "E-commerce Application",
-    description: "Project 3 description",
-    image: "/images/projects/3.png",
+    id: 9,
+    title: "Kopi Hening Website ",
+    description: "Kopi Hening adalah tempat yang tenang dan nyaman untuk menikmati berbagai varian kopi berkualitas, disajikan dengan penuh keahlian dan perhatian pada detail.",
+    image: "/images/projects/9.png",
     tag: ["All", "Web"],
     gitUrl: "/",
-    previewUrl: "/",
-  },
-  {
-    id: 4,
-    title: "Food Ordering Application",
-    description: "Project 4 description",
-    image: "/images/projects/4.png",
-    tag: ["All", "Mobile"],
-    gitUrl: "/",
-    previewUrl: "/",
-  },
-  {
-    id: 5,
-    title: "React Firebase Template",
-    description: "Authentication and CRUD operations",
-    image: "/images/projects/5.png",
-    tag: ["All", "Web"],
-    gitUrl: "/",
-    previewUrl: "/",
-  },
-  {
-    id: 6,
-    title: "Full-stack Roadmap",
-    description: "Project 5 description",
-    image: "/images/projects/6.png",
-    tag: ["All", "Web"],
-    gitUrl: "/",
-    previewUrl: "/",
+    previewUrl: "https://kopihening-web.vercel.app/",
   },
 ];
 
@@ -85,20 +58,11 @@ const ProjectsSection = () => {
         My Projects
       </h2>
       <div className="text-white flex flex-row justify-center items-center gap-2 py-6">
+        
         <ProjectTag
           onClick={handleTagChange}
-          name="All"
-          isSelected={tag === "All"}
-        />
-        <ProjectTag
-          onClick={handleTagChange}
-          name="Web"
-          isSelected={tag === "Web"}
-        />
-        <ProjectTag
-          onClick={handleTagChange}
-          name="Mobile"
-          isSelected={tag === "Mobile"}
+          name="Website"
+          isSelected={tag === "Website"}
         />
       </div>
       <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">

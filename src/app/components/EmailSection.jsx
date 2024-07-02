@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import GithubIcon from "../../../public/github-icon.svg";
-import LinkedinIcon from "../../../public/linkedin-icon.svg";
+import emailjs from "emailjs-com";
+import TiktokIcon from "../../../public/tiktok-icon.svg";
+import WhatsappIcon from "../../../public/whatsapp-icon.svg";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -10,32 +11,29 @@ const EmailSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = {
-      email: e.target.email.value,
-      subject: e.target.subject.value,
-      message: e.target.message.value,
-    };
-    const JSONdata = JSON.stringify(data);
-    const endpoint = "/api/send";
 
-    // Form the request for sending data to the server.
-    const options = {
-      // The method is POST because we are sending data.
-      method: "POST",
-      // Tell the server we're sending JSON.
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // Body of the request is the JSON data we created above.
-      body: JSONdata,
-    };
+    try {
+      const { email, name, message } = e.target.elements;
 
-    const response = await fetch(endpoint, options);
-    const resData = await response.json();
+      // Kirim email menggunakan EmailJS
+      const templateParams = {
+        from_name: name.value,
+        message_html: message.value,
+        reply_to: email.value,
+      };
 
-    if (response.status === 200) {
-      console.log("Message sent.");
+      await emailjs.send(
+        "YOUR_SERVICE_ID", // Ganti dengan service ID Anda
+        "YOUR_TEMPLATE_ID", // Ganti dengan template ID Anda
+        templateParams,
+        "YOUR_USER_ID" // Ganti dengan user ID Anda
+      );
+
+      console.log("Email sent successfully!");
       setEmailSubmitted(true);
+    } catch (error) {
+      console.error("Error sending email:", error);
+      // Handle error sending email
     }
   };
 
@@ -46,21 +44,48 @@ const EmailSection = () => {
     >
       <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-1/2 -translate-1/2"></div>
       <div className="z-10">
-        <h5 className="text-xl font-bold text-white my-2">
-          Let&apos;s Connect
-        </h5>
+        <h5 className="text-xl font-bold text-white my-2">Ayo Terhubung</h5>
         <p className="text-[#ADB7BE] mb-4 max-w-md">
-          {" "}
-          I&apos;m currently looking for new opportunities, my inbox is always
-          open. Whether you have a question or just want to say hi, I&apos;ll
-          try my best to get back to you!
+          Saya saat ini sedang mencari peluang baru, dan kotak masuk saya selalu
+          terbuka. Baik Anda memiliki pertanyaan atau hanya ingin menyapa, saya
+          akan berusaha sebaik mungkin untuk membalas Anda!
         </p>
-        <div className="socials flex flex-row gap-2">
-          <Link href="github.com">
-            <Image src={GithubIcon} alt="Github Icon" />
+        <div className="socials text-white flex flex-row gap-2">
+          <Link href="https://www.tiktok.com/@fikhru05?is_from_webapp=1&sender_device=pc">
+            <Image
+              width={48}
+              height={48}
+              src="/tiktok-icon.svg"
+              className="w-8 h-8"
+              alt="Tiktok Icon"
+            />
           </Link>
-          <Link href="linkedin.com">
-            <Image src={LinkedinIcon} alt="Linkedin Icon" />
+          <Link href="https://wa.me/+6287755860381">
+            <Image
+              width={48}
+              height={48}
+              src="/whatsapp-icon.svg"
+              className="w-8 h-8"
+              alt="Whatsapp Icon"
+            />
+          </Link>
+          <Link href="https://www.instagram.com/fikru_05/?igsh=YzU1NGVlODEzOA%3D%3D">
+            <Image
+              width={48}
+              height={48}
+              src="/instagram-icon.svg"
+              className="w-8 h-8"
+              alt="Instagram Icon"
+            />
+          </Link>
+          <Link href="https://github.com/Codify-Fikhru">
+            <Image
+              width={48}
+              height={48}
+              src="/github-icon.svg"
+              className="w-8 h-8"
+              alt="Github Icon"
+            />
           </Link>
         </div>
       </div>
@@ -84,23 +109,23 @@ const EmailSection = () => {
                 id="email"
                 required
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="jacob@google.com"
+                placeholder="Your Email"
               />
             </div>
             <div className="mb-6">
               <label
-                htmlFor="subject"
+                htmlFor="name"
                 className="text-white block text-sm mb-2 font-medium"
               >
-                Subject
+                Name
               </label>
               <input
-                name="subject"
+                name="name"
                 type="text"
-                id="subject"
+                id="name"
                 required
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="Just saying hi"
+                placeholder="Your Name"
               />
             </div>
             <div className="mb-6">
@@ -114,7 +139,7 @@ const EmailSection = () => {
                 name="message"
                 id="message"
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="Let's talk about..."
+                placeholder="Your Message"
               />
             </div>
             <button
