@@ -23,6 +23,7 @@ export async function POST(req, res) {
     });
     return NextResponse.json(data);
   } catch (error) {
+    console.error('Error sending email:', error);
     return NextResponse.json({ error });
   }
 }
